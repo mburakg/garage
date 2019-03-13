@@ -93,6 +93,7 @@ class DiscreteMLPQFunction(QFunction2):
             for model in self.models:
                 out = model.build(out)
 
+    @property
     def q_vals(self):
         return self.models[-1].networks['default'].outputs
 
@@ -119,6 +120,12 @@ class DiscreteMLPQFunction(QFunction2):
             return out
 
     def clone(self, name):
+        """
+        Return a clone of the Q-function.
+
+        Args:
+            name: Name of the newly created q-function.
+        """
         return self.__class__(
             name=name,
             env_spec=self._env_spec,
