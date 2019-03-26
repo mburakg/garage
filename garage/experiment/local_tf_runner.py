@@ -171,8 +171,8 @@ class LocalRunner:
             One batch of samples.
 
         """
-        if self.n_epoch_cycles == 1:
-            logger.log('Obtaining samples...')
+        # if self.n_epoch_cycles == 1:
+        # logger.log('Obtaining samples...')
         return self.sampler.obtain_samples(itr, batch_size)
 
     def save_snapshot(self, itr, paths=None):
@@ -200,8 +200,8 @@ class LocalRunner:
             pause_for_plot: Pause for plot.
 
         """
-        logger.log('Time %.2f s' % (time.time() - self.start_time))
-        logger.log('EpochTime %.2f s' % (time.time() - self.itr_start_time))
+        # logger.log('Time %.2f s' % (time.time() - self.start_time))
+        # logger.log('EpochTime %.2f s' % (time.time() - self.itr_start_time))
         logger.log(tabular)
         if self.plot:
             self.plotter.update_plot(self.policy, self.algo.max_path_length)
