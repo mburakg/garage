@@ -139,7 +139,6 @@ class OffPolicyVectorizedSampler(BatchSampler):
                     if self.algo.es:
                         self.algo.es.reset()
             obses = next_obses
-
         return paths
 
     @overrides

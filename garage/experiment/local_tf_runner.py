@@ -246,7 +246,7 @@ class LocalRunner:
         self.start_worker()
         self.start_time = time.time()
 
-        itr = 0
+        itr = 1
         last_return = None
         for epoch in range(n_epochs):
             self.itr_start_time = time.time()

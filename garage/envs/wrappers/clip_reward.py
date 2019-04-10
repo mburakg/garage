@@ -10,3 +10,7 @@ class ClipReward(gym.Wrapper):
         """gym.Env step function."""
         obs, reward, done, info = self.env.step(ac)
         return obs, np.sign(reward), done, info
+
+    def reset(self, **kwargs):
+        """gym.Env reset function."""
+        return self.env.reset(**kwargs)
