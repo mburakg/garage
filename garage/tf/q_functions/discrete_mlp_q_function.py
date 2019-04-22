@@ -35,7 +35,7 @@ class DiscreteMLPQFunction(QFunction2):
 
     def __init__(self,
                  env_spec,
-                 name="discrete_mlp_q_function",
+                 name='discrete_mlp_q_function',
                  hidden_sizes=(32, 32),
                  hidden_nonlinearity=tf.nn.relu,
                  hidden_w_init=tf.glorot_uniform_initializer(),
@@ -86,7 +86,7 @@ class DiscreteMLPQFunction(QFunction2):
                 layer_normalization=layer_normalization)
 
         self.models.append(model)
-        obs_ph = tf.placeholder(tf.float32, (None, ) + obs_dim, name="obs")
+        obs_ph = tf.placeholder(tf.float32, (None, ) + obs_dim, name='obs')
 
         with tf.variable_scope(self._variable_scope):
             out = obs_ph

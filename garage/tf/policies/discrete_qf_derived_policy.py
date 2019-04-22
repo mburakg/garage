@@ -20,7 +20,7 @@ class DiscreteQfDerivedPolicy(Policy2):
         qf: The q-function used.
     """
 
-    def __init__(self, env_spec, qf, name="DiscreteQfDerivedPolicy"):
+    def __init__(self, env_spec, qf, name='DiscreteQfDerivedPolicy'):
         super().__init__(name, env_spec)
 
         assert isinstance(env_spec.action_space, Discrete)

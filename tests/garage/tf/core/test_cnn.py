@@ -19,7 +19,7 @@ class TestCNN(TfGraphTestCase):
 
         input_shape = self.obs_input.shape[1:]  # height, width, channel
         self._input_ph = tf.placeholder(
-            tf.float32, shape=(None, ) + input_shape, name="input")
+            tf.float32, shape=(None, ) + input_shape, name='input')
 
         self.strides = (1, 1)
         self.filter_sizes = (3, 3)
@@ -29,14 +29,14 @@ class TestCNN(TfGraphTestCase):
         self.hidden_nonlinearity = tf.nn.relu
 
     def test_output_shape(self):
-        with tf.variable_scope("CNN"):
+        with tf.variable_scope('CNN'):
             self.cnn = cnn(
                 input_var=self._input_ph,
                 filter_dims=self.filter_sizes,
                 num_filters=self.out_channels,
                 strides=self.strides,
-                name="cnn1",
-                padding="VALID",
+                name='cnn1',
+                padding='VALID',
                 hidden_w_init=tf.constant_initializer(1),
                 hidden_nonlinearity=self.hidden_nonlinearity)
 
@@ -45,17 +45,17 @@ class TestCNN(TfGraphTestCase):
         result = self.sess.run(
             self.cnn, feed_dict={self._input_ph: self.obs_input})
         # assert result.shape ==
-        print("test_output_shape: ", result.shape)
+        print('test_output_shape: ', result.shape)
 
     def test_output_with_identity_filter(self):
-        with tf.variable_scope("CNN"):
+        with tf.variable_scope('CNN'):
             self.cnn = cnn(
                 input_var=self._input_ph,
                 filter_dims=self.filter_sizes,
                 num_filters=self.out_channels,
                 strides=self.strides,
-                name="cnn1",
-                padding="VALID",
+                name='cnn1',
+                padding='VALID',
                 hidden_w_init=tf.constant_initializer(1),
                 hidden_nonlinearity=self.hidden_nonlinearity)
 
@@ -82,14 +82,14 @@ class TestCNN(TfGraphTestCase):
 
     def test_output_with_random_filter(self):
         # Build a cnn with random filter weights
-        with tf.variable_scope("CNN"):
+        with tf.variable_scope('CNN'):
             self.cnn2 = cnn(
                 input_var=self._input_ph,
                 filter_dims=self.filter_sizes,
                 num_filters=self.out_channels,
                 strides=self.strides,
-                name="cnn1",
-                padding="VALID",
+                name='cnn1',
+                padding='VALID',
                 hidden_nonlinearity=self.hidden_nonlinearity)
 
         self.sess.run(tf.global_variables_initializer())
@@ -98,11 +98,11 @@ class TestCNN(TfGraphTestCase):
             self.cnn2, feed_dict={self._input_ph: self.obs_input})
 
         # get weight values
-        with tf.variable_scope("CNN", reuse=True):
-            h0_w = tf.get_variable("cnn1/h0/weight").eval()
-            h0_b = tf.get_variable("cnn1/h0/bias").eval()
-            h1_w = tf.get_variable("cnn1/h1/weight").eval()
-            h1_b = tf.get_variable("cnn1/h1/bias").eval()
+        with tf.variable_scope('CNN', reuse=True):
+            h0_w = tf.get_variable('cnn1/h0/weight').eval()
+            h0_b = tf.get_variable('cnn1/h0/bias').eval()
+            h1_w = tf.get_variable('cnn1/h1/weight').eval()
+            h1_b = tf.get_variable('cnn1/h1/bias').eval()
 
         filter_weights = (h0_w, h1_w)
         filter_bias = (h0_b, h1_b)
@@ -125,16 +125,16 @@ class TestCNN(TfGraphTestCase):
         pool_shape = 2
         pool_stride = 2
         # Build a cnn with random filter weights
-        with tf.variable_scope("CNN"):
+        with tf.variable_scope('CNN'):
             self.cnn2 = cnn_with_max_pooling(
                 input_var=self._input_ph,
                 filter_dims=self.filter_sizes,
                 num_filters=self.out_channels,
                 strides=self.strides,
-                name="cnn1",
+                name='cnn1',
                 pool_shapes=(pool_shape, pool_shape),
                 pool_strides=(pool_stride, pool_stride),
-                padding="VALID",
+                padding='VALID',
                 hidden_w_init=tf.constant_initializer(1),
                 hidden_nonlinearity=self.hidden_nonlinearity)
 
@@ -144,11 +144,11 @@ class TestCNN(TfGraphTestCase):
             self.cnn2, feed_dict={self._input_ph: self.obs_input})
 
         # get weight values
-        with tf.variable_scope("CNN", reuse=True):
-            h0_w = tf.get_variable("cnn1/h0/weight").eval()
-            h0_b = tf.get_variable("cnn1/h0/bias").eval()
-            h1_w = tf.get_variable("cnn1/h1/weight").eval()
-            h1_b = tf.get_variable("cnn1/h1/bias").eval()
+        with tf.variable_scope('CNN', reuse=True):
+            h0_w = tf.get_variable('cnn1/h0/weight').eval()
+            h0_b = tf.get_variable('cnn1/h0/bias').eval()
+            h1_w = tf.get_variable('cnn1/h1/weight').eval()
+            h1_b = tf.get_variable('cnn1/h1/bias').eval()
 
         filter_weights = (h0_w, h1_w)
         filter_bias = (h0_b, h1_b)

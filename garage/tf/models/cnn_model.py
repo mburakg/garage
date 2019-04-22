@@ -24,7 +24,7 @@ class CNNModel(Model):
                  num_filters,
                  strides,
                  name=None,
-                 padding="SAME",
+                 padding='SAME',
                  hidden_nonlinearity=tf.nn.relu):
         super().__init__(name)
         self._filter_dims = filter_dims
@@ -41,4 +41,4 @@ class CNNModel(Model):
             num_filters=self._num_filters,
             strides=self._strides,
             padding=self._padding,
-            name="cnn")
+            name='cnn')

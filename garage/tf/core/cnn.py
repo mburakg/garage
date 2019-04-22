@@ -8,7 +8,7 @@ def cnn(input_var,
         num_filters,
         strides,
         name,
-        padding="VALID",
+        padding='VALID',
         hidden_nonlinearity=tf.nn.relu,
         hidden_w_init=tf.contrib.layers.xavier_initializer(),
         hidden_b_init=tf.zeros_initializer()):
@@ -54,7 +54,7 @@ def cnn_with_max_pooling(input_var,
                          name,
                          pool_shapes,
                          pool_strides,
-                         padding="VALID",
+                         padding='VALID',
                          hidden_nonlinearity=tf.nn.relu,
                          hidden_w_init=tf.contrib.layers.xavier_initializer(),
                          hidden_b_init=tf.zeros_initializer()):
@@ -108,7 +108,7 @@ def _conv(input_var,
           strides,
           hidden_w_init,
           hidden_b_init,
-          padding="VALID"):
+          padding='VALID'):
 
     # channel from input
     input_shape = input_var.get_shape()[-1].value

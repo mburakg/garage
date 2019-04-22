@@ -70,9 +70,9 @@ class OffPolicyVectorizedSampler(BatchSampler):
         while n_samples < batch_size:
             policy.reset(dones)
             if self.algo.input_include_goal:
-                obs = [obs["observation"] for obs in obses]
-                d_g = [obs["desired_goal"] for obs in obses]
-                a_g = [obs["achieved_goal"] for obs in obses]
+                obs = [obs['observation'] for obs in obses]
+                d_g = [obs['desired_goal'] for obs in obses]
+                a_g = [obs['achieved_goal'] for obs in obses]
                 input_obses = np.concatenate((obs, d_g), axis=-1)
             else:
                 input_obses = obses
@@ -101,10 +101,10 @@ class OffPolicyVectorizedSampler(BatchSampler):
                     achieved_goal=a_g,
                     terminal=dones,
                     next_observation=[
-                        next_obs["observation"] for next_obs in next_obses
+                        next_obs['observation'] for next_obs in next_obses
                     ],
                     next_achieved_goal=[
-                        next_obs["achieved_goal"] for next_obs in next_obses
+                        next_obs['achieved_goal'] for next_obs in next_obses
                     ],
                 )
             else:
@@ -123,17 +123,17 @@ class OffPolicyVectorizedSampler(BatchSampler):
                         rewards=[],
                         env_infos=[],
                     )
-                running_paths[idx]["rewards"].append(reward)
-                running_paths[idx]["env_infos"].append(env_info)
+                running_paths[idx]['rewards'].append(reward)
+                running_paths[idx]['env_infos'].append(env_info)
 
                 if done:
                     paths.append(
                         dict(
                             rewards=tensor_utils.stack_tensor_list(
-                                running_paths[idx]["rewards"]),
+                                running_paths[idx]['rewards']),
                             env_infos=tensor_utils.stack_tensor_dict_list(
-                                running_paths[idx]["env_infos"])))
-                    n_samples += len(running_paths[idx]["rewards"])
+                                running_paths[idx]['env_infos'])))
+                    n_samples += len(running_paths[idx]['rewards'])
                     running_paths[idx] = None
 
                     if self.algo.es:
@@ -152,12 +152,12 @@ class OffPolicyVectorizedSampler(BatchSampler):
         """
         success_history = []
         for path in paths:
-            if "is_success" in path["env_infos"]:
-                success = np.array(path["env_infos"]["is_success"])
+            if 'is_success' in path['env_infos']:
+                success = np.array(path['env_infos']['is_success'])
                 success_rate = np.mean(success)
                 success_history.append(success_rate)
 
-        undiscounted_returns = [sum(path["rewards"]) for path in paths]
+        undiscounted_returns = [sum(path['rewards']) for path in paths]
         samples_data = dict(
             undiscounted_returns=undiscounted_returns,
             success_history=success_history)
