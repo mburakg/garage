@@ -269,7 +269,7 @@ class NPO(BatchPolopt):
             with tf.name_scope('augmented_rewards'):
                 rewards = i.reward_var + self.policy_ent_coeff * policy_entropy
 
-        with tf.name_scope('policy_loss'):
+        with tf.variable_scope('policy_loss'):
             adv = compute_advantages(
                 self.discount,
                 self.gae_lambda,
@@ -418,7 +418,7 @@ class NPO(BatchPolopt):
             return loss, pol_mean_kl
 
     def _build_entropy_term(self, i):
-        with tf.name_scope('policy_entropy'):
+        with tf.variable_scope('policy_entropy'):
             if self.policy.recurrent:
                 policy_dist_info = self.policy.dist_info_sym(
                     i.obs_var,
